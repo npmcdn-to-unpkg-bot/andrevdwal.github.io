@@ -1,0 +1,102 @@
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="{% if page.excerpt %}{{ page.excerpt | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ site.description }}{% endif %}">
+    <meta name="author" content="">
+
+    <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+    <link rel="canonical" href="{{ page.url | replace:'index.html','' | prepend: site.baseurl | prepend: site.url }}">
+    <link rel="alternate" type="application/rss+xml" title="{{ site.title }}" href="{{ "/feed.xml" | prepend: site.baseurl | prepend: site.url }}">
+
+    <!-- Material Design fonts -->
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/css?family=Roboto:300,400,500,700">
+    <link rel="stylesheet" type="text/css" href="//fonts.googleapis.com/icon?family=Material+Icons">
+
+    <!-- Custom fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Damion' rel='stylesheet' type='text/css'>
+
+    <!-- Bootstrap -->
+    <link href="/css/bootstrap.css" rel="stylesheet">
+
+    <!-- Bootstrap Material Design -->
+    <link rel="stylesheet" type="text/css" href="/dist/css/bootstrap-material-design.css">
+    <link rel="stylesheet" type="text/css" href="/dist/css/ripples.min.css">
+
+    <!-- Custom CSS -->
+    <link href="/css/offtopic.css" rel="stylesheet">
+    <link href="/css/codehighlight.css" rel="stylesheet">
+    <style>
+        body {
+            padding-top: 70px;
+        }
+    </style>
+
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+        <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <!-- jQuery Version 1.11.1 -->
+    <script src="/js/jquery.js"></script>
+
+    <!-- Masonry -->
+    <script src="https://npmcdn.com/imagesloaded@4.1/imagesloaded.pkgd.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/masonry/3.1.5/masonry.pkgd.min.js"></script>
+
+    <script type="text/javascript">
+        $(document).ready(function() {
+
+            $(window).scroll(function(){
+                if ($(this).scrollTop() > 100) {
+                    $('#back-to-top').fadeIn();
+                } else {
+                    $('#back-to-top').fadeOut();
+                }
+            });
+
+            //Click event to scroll to top
+            $('#back-to-top').click(function(){
+                $('html, body').animate({scrollTop : 0},800);
+                return false;
+            });
+
+            //$(document).tooltip();
+
+            if ($(window).width() > 767) {
+
+                $('.grid-item').hide();
+                $('.grid').imagesLoaded( function() {
+                    $('.grid-item').fadeIn();
+
+                    $('.grid').masonry({
+                        itemSelector: '.grid-item',
+                        columnWidth: '.grid-item',
+                        gutter: 20,
+                        percentPosition: true
+                    });
+                });
+            }
+
+        });
+
+        $(document).resize(function() {
+
+            if ($(window).width() <= 767) {
+                $('.grid').masonry( 'destroy' );
+            } else {
+                $('.grid').masonry({
+                    itemSelector: '.grid-item',
+                    columnWidth: '.grid-item',
+                    gutter: 20,
+                    percentPosition: true
+                });
+            }
+
+        });
+    </script>
+
+</head>
